@@ -4,40 +4,15 @@ import time
 from time import sleep
 from sshkeyboard import listen_keyboard,stop_listening
 import keyboard
+
+# Initialize the LX-16A library @ ttyUSB0
 LX16A.initialize("/dev/ttyUSB0")
 
-### FLAGS
-right_flag = False
-left_flag = False
-steering_flag = True
-xbox_flag = False
-#mutexLock = False
-
-### Constants
-turn_radius = 0
-wheelbase = 0
-steering_angle = 0
-motorSpeedMax = 1000
-value = 0
-### VARIABLES
-#theta = 30
-#thetaFront = 120+theta
-#thetaBack = 0 #120-theta
+# GLOBAL SCOPE
 motorSpeed = 0
 
-### Ackermann stearing
-#def calculate_steering_angle(turn_radius, wheelbase):
-#	 return math.atan(wheelbase / turn_radius)
-
-#def calculate_inner_wheel_angle(steering_angle, wheelbase):
-#	 return math.atan(2 * wheelbase * math.sin(steering_angle) / wheelbase)
-
-#def calculate_outer_wheel_angle(steering_angle, wheelbase):
-#	 return math.atan(2 * wheelbase * math.sin(steering_angle) / wheelbase) + steering_angle
-
-### KEYBOARD LISTENER
+# Keyboard listener
 async def press(key):
-#	print(f"'{key}' pressed")
 	global motorSpeed, theta
 
 	if key == 'right':
@@ -63,23 +38,11 @@ async def press(key):
 	steerRF.move(165-theta)		# 165	_right	OK
 	steerLB.move(140+theta)		# 140	_left	OK
 	steerRB.move(125+theta)		# 125	_left	OK
-#		if keyboard.press("a") == True:
-#				print(f"pressed a")
-
-		#theta = theta-1
-
-
 
 
 async def release(key):
 #	print(f"'{key}' released")
 	pass
-
-
-
-
-#print('yo')
-
 
 # Initialize servos
 try:
@@ -104,11 +67,9 @@ except ServoTimeoutError as e:
 	print(f"Servo {e.id_} is not responding. Exiting...")
 	quit()
 
-
-
 theta = 0
 thetaFront = 120
-thetaBack = 140 #120-theta
+thetaBack = 140
 
 ### Main loop
 try:
