@@ -1,0 +1,7 @@
+<launch>
+    <node name="camera_node" pkg="camera" type="camera_node" />
+    <node name="process_left_node" pkg="camera" type="process_left_node" output="screen" />
+    <node name="process_right_node" pkg="camera" type="process_right_node" output="screen" />
+</launch>
+
+
